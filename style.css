@@ -16,7 +16,7 @@ body {
 
    .option-panel {
      background-color: rgba(255, 255, 255, 0.267);
-     border: 1px solid rgb(0, 0, 0);
+     border: 1px solid black;
      /* width: 80%; */
    }
 
@@ -26,7 +26,7 @@ body {
    
    .order-frame {
      height: 70%;
-     width: 70%;
+     width: 80%;
      background-color: tan;
      border: 2px solid chocolate;
    }
