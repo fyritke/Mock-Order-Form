@@ -13,6 +13,16 @@ body {
      border: 4px solid black;
      margin-top: 6%;
    }
+
+   .option-panel {
+     background-color: rgba(255, 255, 255, 0.267);
+     border: 1px solid rgb(0, 0, 0);
+     /* width: 80%; */
+   }
+
+   .col-form-label-lg {
+     font-variant-caps: all-small-caps;
+   }
    
    .order-frame {
      height: 70%;
