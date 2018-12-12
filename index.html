@@ -1,0 +1,252 @@
+<!-- ===================== -->
+<!--    code by: fy    -->
+<!-- http://fyritke.us -->
+<!-- ===================== -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Pizza Place</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <main class="container text-center">
+    <h1 class="my-4"><b>Pizza Place</b></h1>
+    <div class="order-frame container text-justify mx-auto mb-4">
+      <div class="row"> <!-- header row - introduces menu -->
+        <div class="col-11 mx-auto pt-4">
+          <h5 class="text-center">Please select the options you prefer,<br>then hit "Send it!" to complete your order.</h4>
+          <hr class="w-75 my-4">
+        </div>
+      </div>
+      <form action="">
+        <div class="row"> <!-- menu row - contains all options as a menu of forms -->
+          <div class="col m-3"> <!-- additional padding for menu -->
+            <div class="form-row mb-1"> <!-- all pie options -->
+              <div class="col-12 col-sm-6 col-md"> <!-- col: size -->
+                <label for="pizzaSize">Size:</label>
+                <fieldset class="form-group-inline" id="pizzaSize">
+                  <div class="form-check-inline">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optsize">Personal <small>($6.00)</small>
+                    </label>
+                  </div>
+                  <div class="form-check-inline">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optsize">Medium <small>($10.00)</small>
+                    </label>
+                  </div>
+                  <div class="form-check-inline">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optsize">Large <small>($14.00)</small>
+                    </label>
+                  </div>
+                  <div class="form-check-inline">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optsize">Extra-Large <small>($16.00)</small>
+                    </label>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-12 col-sm-6 col-md"> <!-- col: cheese -->
+                <label for="pizzaCheese">Cheese:</label>
+                <fieldset class="form-group" id="pizzaCheese">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optcheese">Regular
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optcheese">Extra <small>($3.00)</small>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optcheese">None
+                    </label>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="w-100 d-md-none"></div> <!-- spacer for splitting up the columns on phones -->
+              <div class="col-12 col-sm-6 col-md"> <!-- col: sauce -->
+                <label for="pizzaSauce">Sauce:</label>
+                <fieldset class="form-group" id="pizzaSauce">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optsauce">Marinara
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optsauce">White Sauce
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optsauce">BBQ
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optsauce">None
+                    </label>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-12 col-sm-6 col-md"> <!-- col: crust -->
+                <legend for="pizzaCrust">Crust:</legend>
+                <fieldset class="form-group" id="pizzaCrust">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optcrust">Plain
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optcrust">Garlic Butter
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optcrust">Cheese-Stuffed <small>($3.00)</small>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optcrust">Spicy
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optcrust">House Special
+                    </label>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <div class="form-row mx-auto"> <!-- all topping options -->
+              <div class="col-12 col-md-4 offset-md-1 my-auto">
+                <p class="text-center text-md-right align-middle small">One (1) meat and (1) veggie are included free of
+                  charge. Additional meats and vegetables beyond the first are $1.00 extra per item.</p>
+              </div>
+              <div class="col-12 col-sm-6 offset-md-1 col-md-3 col-lg-auto"> <!-- col: meats -->
+                <label for="meatToppings">Meats:</label>
+                <div class="form-group" id="meatToppings">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="optmeat">Pepperoni
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="optmeat">Sausage
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="optmeat">Canadian Bacon
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="optmeat">Ground Beef
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="optmeat">Anchovy
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="optmeat">Chicken
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-3 col-lg-auto"> <!-- col: veggies -->
+                <label for="vegToppings">Veggies:</label>
+                <div class="form-group" id="vegToppings">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="optveg">Tomatoes
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="optveg">Onions
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="optveg">Olives
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="optveg">Green Peppers
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="optveg">Mushrooms
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="optveg">Pineapple
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="optveg">Spinach
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" name="optveg">Jalapeno
+                      <!-- todo correct n -->
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row"> <!-- final row - subtotal and finalize button; aligned bottom/end -->
+          <div class="col-11 text-center text-md-right mx-auto">
+            <hr class="w-75 mb-4 mb-sm-5">
+            <div class="row">
+              <div class="col-12 col-md-2 mr-md-auto">
+                <label id="subtotal">$0.00</label>
+              </div>
+              <div class="col-6 col-md-2">
+                <button type="reset" class="btn btn-secondary mb-4">Restart</button>
+              </div>
+              <div class="col-6 col-md-2">
+                <button type="submit" class="btn btn-danger mb-4">Finalize Order</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <script src="script.js" type="javascript"></script>
+</body>
+
+</html>

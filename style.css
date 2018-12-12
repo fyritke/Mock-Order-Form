@@ -1,0 +1,39 @@
+body {
+     background: url("https://thumbs.dreamstime.com/b/seamless-pattern-pepperoni-pizza-slices-vector-67116759.jpg");
+     background-size: 33%;
+     background-attachment: fixed;
+     /* width: 100%; */
+   }
+   
+   main {
+     height: 80%;
+     width: 70%;
+     /* max-width: 700px; */
+     background-color: rgba(255, 255, 255, 0.9);
+     border: 4px solid black;
+     margin-top: 6%;
+   }
+   
+   .order-frame {
+     height: 70%;
+     width: 70%;
+     background-color: tan;
+     border: 2px solid chocolate;
+   }
+   
+   /*
+   @media (max-width: 777.98px) {
+     .main {width : 80%;}
+   }
+   
+   @media (min-width: 778px) and (max-width: 1049.98px) {
+     .main {width: 70%;}
+   }
+   
+   @media (min-width: 1050px) and (max-width: 1349.98px) {
+     .main {width: 60%;}
+   }
+   
+   @media (min-width: 1350px) {
+     .main {width: 50%;}
+   } */
