@@ -1,3 +1,8 @@
+/*     code by: fy     */
+/*  http://fyritke.us  */
+
+/* todo add some damn transitions */
+
 html,
 body {
   /* height: 100%; */
@@ -22,6 +27,9 @@ main {
 
 #company-name {
   font-size: 4em;
+  text-shadow: chocolate 2px 2px;
+}
+.modal-title {
   text-shadow: chocolate 2px 2px;
 }
 

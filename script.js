@@ -4,7 +4,6 @@
 // =====================
 
 // todo move all calculations for price into a diff fxn called updateTotal; call it from getReceipt and the entire <form>'s onclick property
-// todo make it so that receipt stays on same page/loads modal on same page
 // todo if feeling fancy, make it so they ping the unfinished forms in red or something
 // big todo make your own cart and allow adding multiple pizzas
 
@@ -12,19 +11,59 @@
 // main function which grabs the receipt and is triggered by Finalize button
 // ===========================================================================
 function getReceipt() {
-     // initialize!
+     // prepares and formats receipt
+     // todo add other options to receipt and adjust code accordingly
      // ===========================================================================
+     var tabInfo = [[], [], []], // holds the [[size], [extra], and [topping info]] from tabCost()
+     recTotal = 0, // cost of order
+     recSize = ["", 0], // [selected pizza size, its cost]
+     recExtras = [[], 0], // [[selected extra options], their total cost]
+     recToppings = [[], 0], // [[meatOptions[] + vegOptions[]], total cost of toppings]
+     receiptText = "";
      
-     var subTotal = 0, // cost of order
-     receiptText = "", // used to display order to customer
-     selectedSize = ["", 0], // selected pizza size, its cost*/
-     selectedExtras = [[], 0], // [selected extra options], their total cost
-     selectedToppings = [[], 0], // [meatOptions[] + vegOptions[]], total cost of toppings
-     allOptions = [], // selectedExtras + selectedToppings
-     toppingInfo = [[], []]; // [meatOptions[], meatCost], [vegOptions[], vegCost]
+     tabInfo = tabCost();
+     recTotal = tabInfo[0];
+     recSize = tabInfo[1];
+     recExtras = tabInfo[2];
+     recToppings = tabInfo[3];
+     receiptText = "";
 
+     $("#ordrSize").html(recSize[0]);
+     for (var n = 0; n < recExtras[0].length; n++) {
+          receiptText = receiptText + recExtras[0][n] + "<br>";
+     }
+     $("#ordrExtras").html(receiptText);
+     receiptText = "";
+     for (var o = 0; o < recToppings[0].length; o++) {
+          receiptText = receiptText + recToppings[0][o] + "<br>";
+     }
+     $("#ordrToppings").html(receiptText);
+
+     $("#ordrSizeST").html("$" + recSize[1]);
+     if (recExtras[1] != 0) {
+          $("#ordrExtrasST").html("$" + recExtras[1]);
+     } else {
+          $("#ordrExtrasST").html("");
+     }
+     if (recToppings[1] != 0) {
+          $("#ordrToppingsST").html("$" + recToppings[1]);
+     } else {
+          $("#ordrToppingsST").html("");
+     }
+
+     $("#ordrTtl").html("$" + recTotal + ".00");
+     $('#frmOrder').trigger("reset");
+     $('#modalReceipt').modal('show');
+};
+
+function tabCost() {
      // find all pizza options selected by customer
      // ===========================================================================
+     var subTotal = 0, // cost of order
+     selectedSize = ["", 0], // [selected pizza size, its cost]*/
+     selectedExtras = [[], 0], // [[selected extra options], their total cost]
+     selectedToppings = [[], 0], // [[meatOptions[] + vegOptions[]], total cost of toppings]
+     toppingInfo = [[], []]; // [meatOptions[], meatCost], [vegOptions[], vegCost]
 
      var sizeOptions = document.getElementsByName("optsize"),
      extraOptions = document.getElementsByClassName("extra3"), // $3 extra items
@@ -60,32 +99,15 @@ function getReceipt() {
      selectedToppings[1] = Number(toppingInfo[0][1] + toppingInfo[1][1]); // cost of toppings
      console.log("toppings - " + selectedToppings[0] + selectedToppings[1]);
 
-     // calculate total price
+     // calculate total price and update
      // ===========================================================================
 
      subTotal = selectedSize[1] + selectedExtras[1] + selectedToppings[1];
-     document.getElementById("subtotal").innerHTML = "$" + subTotal + ".00";  // todo not working properly
+     $("#subtotal").html("$" + subTotal + ".00");
      console.log("total - $" + subTotal + ".00");
 
-     // prepares and formats receipt
-     // todo add other options to receipt and adjust code accordingly
-     // todo display each item in a table w/ its cost in same row
-     // ===========================================================================
-
-     receiptText = "<h3>Your Order:</h3>";  // todo make into a header that always shows with receipt frame and delete this
-     receiptText = receiptText + selectedSize[0] + "<br>with "; // todo get rid of 'receiptText + '
-     allOptions = selectedExtras[0].concat(selectedToppings[0]);
-     for (var m = (allOptions).length; m > 0; m--) {
-          if (m > 1) {
-               receiptText = receiptText + allOptions[(allOptions).length - m] + ",<br>";
-          } else {
-               receiptText = receiptText + "and " + allOptions[(allOptions).length - m] + "."
-          }
-     }
-     console.log(receiptText);
-     // document.getElementById("showText").innerHTML=txt1; // todo place receipt
+     return [subTotal, selectedSize, selectedExtras, selectedToppings];
 };
-
 
 // ===========================================================================
 // fxn to gather and tabulate cost of selected toppings

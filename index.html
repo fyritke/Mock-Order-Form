@@ -1,12 +1,12 @@
-<!-- ===================== -->
-<!--    code by: fy    -->
-<!-- http://fyritke.us -->
-<!-- ===================== -->
-
-<!-- todo -->
-<!-- make it a bit prettier huh? -->
-<!-- add better font -->
+<!-- =================================================================== -->
+                       <!--    code by: fy    -->
+                       <!-- http://fyritke.us -->
+<!-- =================================================================== -->
+<!-- todo: -->
+<!-- make it a bit prettier i.e. better font, custom radio buttons -->
 <!-- fix bad kerning of #company-name when xs -->
+<!-- 'final row' finalize button still doesn't align properly -- too far to the right -->
+<!-- add nanoscroller -->
 
 <!DOCTYPE html>
 <html>
@@ -21,8 +21,12 @@
 </head>
 
 <body>
+
+  <!-- =================================================================== -->
+                            <!--  MAIN FRAME  -->
+  <!-- =================================================================== -->
   <!-- todo add a single entry frame that covers & introduces everything and fades away on click -->
-  <main class="container text-center pb-2 mt-sm-3 mt-md-5 mt-xl-4 mb-md-4"> <!-- todo add fade-in effect for menu -->
+  <main class="container text-center pb-2 py-2 mt-sm-3 mt-md-5 mt-xl-4 mb-md-4"> <!-- todo add fade-in effect for menu -->
     <p class="text-warning pt-4 pt-sm-0 my-sm-2" id="company-name"><b>PIZZA PLACE</b></p>
     <div class="order-frame container text-justify mx-auto mb-2 mb-sm-3 mb-xl-5">
       <div class="row"> <!-- header row - introduces menu -->
@@ -30,7 +34,7 @@
           <h4 class="text-center">Please select the options you prefer, then hit "Finalize Order" to send it.</h4>
         </div>
       </div>
-      <form>
+      <form id="frmOrder" onclick="tabCost()">
         <div class="row"> <!-- menu row - contains all options as a menu of forms -->
           <div class="col-10 mx-auto mt-3 p-4 option-panel">
             <div class="form-row mb-1"> <!-- all pie options -->
@@ -172,7 +176,7 @@
                   </div>
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="checkbox" class="form-check-input" name="optmeat" value="Anchovy">Anchovy
+                      <input type="checkbox" class="form-check-input" name="optmeat" value="Anchovies">Anchovy
                     </label>
                   </div>
                   <div class="form-check">
@@ -234,12 +238,18 @@
         <div class="row"> <!-- final row - todo running subtotal and reset/finalize buttons -->
           <div class="col-11 text-center text-md-right mx-auto mt-3">
             <div class="row mx-auto">
-              <div class="col-12 col-md mr-0">
+              <div class="col-12 col-md mr-0 my-auto my-md-2">
                 <h4><label id="subtotal">$0.00</label></h4>
               </div>
-              <div class="col-12 col-md-auto d-flex col-lg-4 mb-4">
-                <button type="reset" class="btn btn-secondary border-dark rounded-0 d-inline mr-2 ml-auto">Restart</button>
-                <button id="btnOrder" class="btn btn-light border-dark rounded-0 d-inline mr-auto" onClick="getReceipt()">Finalize Order</button>
+              <div class="col-12 col-md-auto col-lg-4 mb-4">
+                <div class="row">
+                  <div class="col-12 col-sm-6 my-2">
+                    <button id="resetButton" type="reset" class="btn btn-secondary border-dark rounded-0 mr-2 ml-auto" onclick="tabCost()">Restart</button>
+                  </div>
+                  <div class="col-12 col-sm-6 my-2">
+                    <button id="btnOrder" class="btn btn-light border-dark rounded-0 mr-auto" onClick="window.scrollTo(0,0); getReceipt(); return false;">Finalize Order</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -250,6 +260,69 @@
   </main>
   <div class="container-fluid d-none d-sm-block text-center my-sm-3 my-lg-3"><a href="https://fyritke.us/" class="small text-dark">code.by(fy);</a></div>
 
+  <!-- =================================================================== -->
+                               <!-- MODAL -->
+  <!-- =================================================================== -->
+  <!-- todo fix <hr> -->
+  
+  <div class="modal fade" id="modalReceipt" tabindex="-1" role="dialog" aria-labelledby="Receipt" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title"><b>Your Order:</b></h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row pb-0 mb-0"> <!-- pizza -->
+              <div class="col-6 text-left">
+                <p id="ordrSize"></p>
+              </div>
+              <div class="col-6 text-right">
+                <p id="ordrSizeST"></p>
+              </div>
+            </div>
+            <!-- <hr class="w-75"> -->
+            <div class="row py-0 my-0"> <!-- extras -->
+              <div class="col-6 text-left text-nowrap">
+                <p id="ordrExtras"></p>
+              </div>
+              <div class="col-6 mt-auto text-right">
+                <p id="ordrExtrasST"></p>
+              </div>
+            </div>
+            <!-- <hr class="w-75"> -->
+            <div class="row py-0 my-0"> <!-- toppings -->
+              <div class="col-6 text-left">
+                <p id="ordrToppings"></p>
+              </div>
+              <div class="col-6 mt-auto text-right">
+                <p id="ordrToppingsST"></p>
+              </div>
+            </div>
+            <div class="row container-fluid border-top mx-0 pt-3 pb-0 px-0 "> <!-- total price-->
+              <div class="col-auto text-right p-0 mr-auto ml-sm-auto">
+                <h5><b>Total </b></h5>
+              </div>    
+              <div class="col-auto text-center py-0 pl-1 pr-0 mr-sm-auto">
+                <h5 id="ordrTtl"></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <h5><strong>Thank you for your order!</strong></h5>
+        </div>
+      </div>
+    </div>
+  </div>
+                               
+
+  <!-- =================================================================== -->
+                              <!-- SCRIPZ -->
+  <!-- =================================================================== -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -257,6 +330,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
   <script src="script.js" type="text/javascript"></script>
+
 </body>
 
 </html>
