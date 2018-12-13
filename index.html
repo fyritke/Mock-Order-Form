@@ -16,7 +16,8 @@
 </head>
 
 <body>
-  <main class="container text-center">
+  <!-- todo add a single entry frame that covers & introduces everything and fades away on click -->
+  <main class="container text-center"> <!-- todo add fade-in effect for menu -->
     <h1 class="my-4"><b>Pizza Place</b></h1>
     <div class="order-frame container text-justify mx-auto mb-4">
       <div class="row"> <!-- header row - introduces menu -->
@@ -33,23 +34,27 @@
                 <div class="form-group" id="pizzaSize">
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="optsize" value="Personal Pizza">Personal <small>($6.00)</small>
+                      <input type="radio" class="form-check-input" name="optsize" value="6">Personal Pizza
                     </label>
+                    <small>($6.00)</small>
                   </div>
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="optsize" value="Medium Pizza">Medium <small>($10.00)</small>
+                      <input type="radio" class="form-check-input" name="optsize" value="10">Medium Pizza
                     </label>
+                    <small>($10.00)</small>
                   </div>
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="optsize" value="Large Pizza">Large <small>($14.00)</small>
+                      <input type="radio" class="form-check-input" name="optsize" value="14">Large Pizza
                     </label>
+                    <small>($14.00)</small>
                   </div>
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="optsize" value="Extra-Large Pizza">Extra-Large <small>($16.00)</small>
+                      <input type="radio" class="form-check-input" name="optsize" value="16">Extra-Large Pizza
                     </label>
+                    <small>($16.00)</small>
                   </div>
                 </div>
               </div>
@@ -68,7 +73,7 @@
                   </div>
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="optcrust">Cheese-Stuffed <small>($3.00)</small>
+                      <input type="radio" class="form-check-input extra3" name="optcrust" value="Cheese-Stuffed Crust">Cheese-Stuffed <small>($3.00)</small>
                     </label>
                   </div>
                   <div class="form-check">
@@ -119,7 +124,7 @@
                   </div>
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="optcheese">Extra <small>($3.00)</small>
+                      <input type="radio" class="form-check-input extra3" name="optcheese" value="Extra Cheese">Extra <small>($3.00)</small>
                     </label>
                   </div>
                   <div class="form-check">
@@ -131,7 +136,7 @@
               </div>
             </div>
             <div class="form-row mx-auto mb-3"> <!-- all topping options -->
-              <div class="col-12 col-md-4 offset-md-1 my-auto">
+              <div class="col-12 col-md-4 offset-md-1 my-auto"> <!-- reminder to customer about prices of toppings -->
                 <hr class="w-75 my-2">
                 <p class="text-center text-md-right align-middle mr-2 small">One (1) meat and (1) veggie are included free of
                   charge. Additional meats and vegetables beyond the first are $1.00 extra per item.</p>
@@ -221,7 +226,7 @@
             </div>
           </div>
         </div>
-        <div class="row"> <!-- final row - subtotal and finalize button -->
+        <div class="row"> <!-- final row - todo running subtotal and reset/finalize buttons -->
           <div class="col-11 text-center text-md-right mx-auto mt-3">
             <div class="row mx-auto">
               <div class="col-12 col-md mr-0">
