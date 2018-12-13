@@ -3,6 +3,11 @@
 <!-- http://fyritke.us -->
 <!-- ===================== -->
 
+<!-- todo -->
+<!-- make it a bit prettier huh? -->
+<!-- add better font -->
+<!-- fix bad kerning of #company-name when xs -->
+
 <!DOCTYPE html>
 <html>
 
@@ -17,9 +22,9 @@
 
 <body>
   <!-- todo add a single entry frame that covers & introduces everything and fades away on click -->
-  <main class="container text-center"> <!-- todo add fade-in effect for menu -->
-    <h1 class="my-4"><b>Pizza Place</b></h1>
-    <div class="order-frame container text-justify mx-auto mb-4">
+  <main class="container text-center pb-2 mt-sm-3 mt-md-5 mt-xl-4 mb-md-4"> <!-- todo add fade-in effect for menu -->
+    <p class="text-warning pt-4 pt-sm-0 my-sm-2" id="company-name"><b>PIZZA PLACE</b></p>
+    <div class="order-frame container text-justify mx-auto mb-2 mb-sm-3 mb-xl-5">
       <div class="row"> <!-- header row - introduces menu -->
         <div class="col-11 mx-auto pt-4">
           <h4 class="text-center">Please select the options you prefer, then hit "Finalize Order" to send it.</h4>
@@ -27,7 +32,7 @@
       </div>
       <form>
         <div class="row"> <!-- menu row - contains all options as a menu of forms -->
-          <div class="col-10 mx-auto my-3 p-4 option-panel">
+          <div class="col-10 mx-auto mt-3 p-4 option-panel">
             <div class="form-row mb-1"> <!-- all pie options -->
               <div class="col-9 col-sm-6 col-lg-3 mx-auto"> <!-- col: size -->
                 <label class="col-form-label-lg" for="pizzaSize">Size:</label>
@@ -46,7 +51,7 @@
                   </div>
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="optsize" value="14">Large Pizza
+                      <input type="radio" class="form-check-input" name="optsize" value="14" checked>Large Pizza
                     </label>
                     <small>($14.00)</small>
                   </div>
@@ -63,7 +68,7 @@
                 <div class="form-group" id="pizzaCrust">
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="optcrust">Plain
+                      <input type="radio" class="form-check-input" name="optcrust" checked>Plain
                     </label>
                   </div>
                   <div class="form-check">
@@ -94,7 +99,7 @@
                 <div class="form-group" id="pizzaSauce">
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="optsauce">Marinara
+                      <input type="radio" class="form-check-input" name="optsauce" checked>Marinara
                     </label>
                   </div>
                   <div class="form-check">
@@ -119,7 +124,7 @@
                 <div class="form-group" id="pizzaCheese">
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="radio" class="form-check-input" name="optcheese">Regular
+                      <input type="radio" class="form-check-input" name="optcheese" checked>Regular
                     </label>
                   </div>
                   <div class="form-check">
@@ -135,7 +140,7 @@
                 </div>
               </div>
             </div>
-            <div class="form-row mx-auto mb-3"> <!-- all topping options -->
+            <div class="form-row mx-auto mb-3 mb-xl-0"> <!-- all topping options -->
               <div class="col-12 col-md-4 offset-md-1 my-auto"> <!-- reminder to customer about prices of toppings -->
                 <hr class="w-75 my-2">
                 <p class="text-center text-md-right align-middle mr-2 small">One (1) meat and (1) veggie are included free of
@@ -241,7 +246,9 @@
         </div>
       </form>
     </div>
+    <div class="container-fluid my-0 my-md-2 d-xl-none"><h1>&nbsp;</h1></div>
   </main>
+  <div class="container-fluid d-none d-sm-block text-center my-sm-3 my-lg-3"><a href="https://fyritke.us/" class="small text-dark">code.by(fy);</a></div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>

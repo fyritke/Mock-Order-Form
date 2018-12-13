@@ -5,7 +5,6 @@
 
 // todo move all calculations for price into a diff fxn called updateTotal; call it from getReceipt and the entire <form>'s onclick property
 // todo make it so that receipt stays on same page/loads modal on same page
-// todo make it so you can't send the form if all the radio buttons aren't complete; ignore the meat/veg checks
 // todo if feeling fancy, make it so they ping the unfinished forms in red or something
 // big todo make your own cart and allow adding multiple pizzas
 
