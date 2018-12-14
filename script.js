@@ -2,48 +2,57 @@
 //      code by: fy   
 //   http://fyritke.us
 // =====================
-
-// todo move all calculations for price into a diff fxn called updateTotal; call it from getReceipt and the entire <form>'s onclick property
 // todo if feeling fancy, make it so they ping the unfinished forms in red or something
 // big todo make your own cart and allow adding multiple pizzas
+
+tabBill();
 
 // ===========================================================================
 // main function which grabs the receipt and is triggered by Finalize button
 // ===========================================================================
 function getReceipt() {
      // prepares and formats receipt
-     // todo add other options to receipt and adjust code accordingly
      // ===========================================================================
-     var tabInfo = [[], [], []], // holds the [[size], [extra], and [topping info]] from tabCost()
-     recTotal = 0, // cost of order
+     var recTotal = 0, // cost of order
      recSize = ["", 0], // [selected pizza size, its cost]
-     recExtras = [[], 0], // [[selected extra options], their total cost]
+     recCrust = ["", 0], // [selected crust, its cost]
+     recSauce = "", // selected sauce
+     recCheese = ["", 0], // [selected cheese, its cost]
      recToppings = [[], 0], // [[meatOptions[] + vegOptions[]], total cost of toppings]
-     receiptText = "";
+     formatToppings = ""; // reusable text for formatting toppings
      
-     tabInfo = tabCost();
+     var tabInfo = [/*[], [], [], [], [], []*/]; // holds the bill
+     tabInfo = tabBill();
      recTotal = tabInfo[0];
      recSize = tabInfo[1];
-     recExtras = tabInfo[2];
-     recToppings = tabInfo[3];
-     receiptText = "";
+     recCrust = tabInfo[2];
+     recSauce = tabInfo[3];
+     recCheese = tabInfo[4];
+     recToppings = tabInfo[5];
 
+     // hook details of pizza to modal
+     // ===========================================================================
      $("#ordrSize").html(recSize[0]);
-     for (var n = 0; n < recExtras[0].length; n++) {
-          receiptText = receiptText + recExtras[0][n] + "<br>";
-     }
-     $("#ordrExtras").html(receiptText);
-     receiptText = "";
+     $("#ordrCrust").html(recCrust[0] + " Crust");
+     $("#ordrSauce").html(recSauce + " Sauce");
+     $("#ordrCheese").html(recCheese[0] + " Cheese");
      for (var o = 0; o < recToppings[0].length; o++) {
-          receiptText = receiptText + recToppings[0][o] + "<br>";
+          formatToppings = formatToppings + recToppings[0][o] + "<br>";
      }
-     $("#ordrToppings").html(receiptText);
+     $("#ordrToppings").html(formatToppings);
 
+     // hook subtotals of items to modal
+     // ===========================================================================
      $("#ordrSizeST").html("$" + recSize[1]);
-     if (recExtras[1] != 0) {
-          $("#ordrExtrasST").html("$" + recExtras[1]);
+     if (recCrust[1] != 0) {
+          $("#ordrCrustST").html("$" + recCrust[1]);
      } else {
-          $("#ordrExtrasST").html("");
+          $("#ordrCrustST").html("");
+     }
+     if (recCheese[1] != 0) {
+          $("#ordrCheeseST").html("$" + recCheese[1]);
+     } else {
+          $("#ordrCheeseST").html("");
      }
      if (recToppings[1] != 0) {
           $("#ordrToppingsST").html("$" + recToppings[1]);
@@ -51,68 +60,90 @@ function getReceipt() {
           $("#ordrToppingsST").html("");
      }
 
+     // finally, update total, reset order form, and call modal
+     // ===========================================================================
      $("#ordrTtl").html("$" + recTotal + ".00");
-     $('#frmOrder').trigger("reset");
+     clearOrder();
      $('#modalReceipt').modal('show');
 };
 
-function tabCost() {
+// ===========================================================================
+// records entire bill and updates the total
+// ===========================================================================
+function tabBill() {
+     console.log("executing");
      // find all pizza options selected by customer
      // ===========================================================================
      var subTotal = 0, // cost of order
      selectedSize = ["", 0], // [selected pizza size, its cost]*/
-     selectedExtras = [[], 0], // [[selected extra options], their total cost]
+     selectedCrust = ["", 0], // selected Crust
+     selectedSauce = "", // selected Sauce
+     selectedCheese = ["", 0], // selected Cheese
      selectedToppings = [[], 0], // [[meatOptions[] + vegOptions[]], total cost of toppings]
      toppingInfo = [[], []]; // [meatOptions[], meatCost], [vegOptions[], vegCost]
 
      var sizeOptions = document.getElementsByName("optsize"),
-     extraOptions = document.getElementsByClassName("extra3"), // $3 extra items
+     crustOptions = document.getElementsByName("optcrust"),
+     sauceOptions = document.getElementsByName("optsauce"),
+     cheeseOptions = document.getElementsByName("optcheese"),
      meatOptions = document.getElementsByName("optmeat"),
      vegOptions = document.getElementsByName("optveg");
 
-     // determine size of the pizza and set base cost
+     // record size of pizza and base cost
      // ===========================================================================
-
      for (var i = 0; i < sizeOptions.length; i++) {
           if (sizeOptions[i].checked) {
                selectedSize = [sizeOptions[i].parentElement.innerText, Number(sizeOptions[i].value)]; // gets name of size option from its parent label, records its cost [in this case it's .value]
           }
      }
 
-     // determine which/how many $3 extras there are
+     // record crust and cost
      // ===========================================================================
-
-     for (var l = 0; l < extraOptions.length; l++) {
-          if (extraOptions[l].checked) {
-               selectedExtras[0].push(extraOptions[l].value);
+     for (var l = 0; l < crustOptions.length; l++) {
+          if (crustOptions[l].checked) {
+               selectedCrust[0] = crustOptions[l].parentElement.innerText;
+               if (crustOptions[l].classList.contains("extra3")) {
+                    selectedCrust[1] = 3;
+               }
           }
      }
-     selectedExtras[1] = Number(selectedExtras[0].length) * 3; // fine for now bc every extra is $3
-     console.log("size - " + selectedSize[0]);
-     console.log("extras - " + selectedExtras[0]);
 
-     // gather toppings together as one and tabulate their total cost
+     // record which sauce was chosen
      // ===========================================================================
+     for (var k = 0; k < sauceOptions.length; k++) {
+          if (sauceOptions[k].checked) {
+               selectedSauce = sauceOptions[k].parentElement.innerText;
+               if (selectedSauce == "None") {
+                    selectedSauce = "No";
+               }
+          }
+     }
+
+     // record cheese and cost
+     // ===========================================================================
+     for (var m = 0; m < cheeseOptions.length; m++) {
+          if (cheeseOptions[m].checked) {
+               selectedCheese[0] = cheeseOptions[m].parentElement.innerText;
+               if (cheeseOptions[m].classList.contains("extra3")) {
+                    selectedCheese[1] = 3;
+               }
+          }
+     }
 
      toppingInfo = [tabulateToppings(meatOptions), tabulateToppings(vegOptions)];
      selectedToppings[0] = toppingInfo[0][0].concat(toppingInfo[1][0]); // names of toppings
      selectedToppings[1] = Number(toppingInfo[0][1] + toppingInfo[1][1]); // cost of toppings
-     console.log("toppings - " + selectedToppings[0] + selectedToppings[1]);
 
      // calculate total price and update
      // ===========================================================================
-
-     subTotal = selectedSize[1] + selectedExtras[1] + selectedToppings[1];
+     subTotal = selectedSize[1] + selectedCrust[1] + selectedCheese[1] + selectedToppings[1];
      $("#subtotal").html("$" + subTotal + ".00");
-     console.log("total - $" + subTotal + ".00");
-
-     return [subTotal, selectedSize, selectedExtras, selectedToppings];
+     return [subTotal, selectedSize, selectedCrust, selectedSauce, selectedCheese, selectedToppings];
 };
 
 // ===========================================================================
 // fxn to gather and tabulate cost of selected toppings
 // ===========================================================================
-
 function tabulateToppings(providedOptions) {
      var toppingCost = 0, // price of chosen options
      selectedTops = [], // names of the chosen options
@@ -133,6 +164,14 @@ function tabulateToppings(providedOptions) {
      }
      
      returnToppings = [selectedTops, toppingCost];
-     console.log(returnToppings);
+     // console.log(returnToppings);
      return returnToppings;
+};
+
+// ===========================================================================
+// wipes order clean
+// ===========================================================================
+function clearOrder() {
+     $('#frmOrder').trigger("reset");
+     tabBill();
 };
